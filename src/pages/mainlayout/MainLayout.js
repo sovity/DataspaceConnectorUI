@@ -1,6 +1,7 @@
 import NavigationMenu from "@/components/navigationmenu/NavigationMenu.vue";
 import InfoBox from "@/components/infobox/InfoBox.vue";
 import dataUtils from "@/utils/dataUtils";
+import Keycloak from "keycloak-js"
 
 // import BrokersPage from "@/pages/brokers/BrokersPage.vue";
 
@@ -26,6 +27,20 @@ export default {
         }
     },
     mounted: function () {
+        var keycloak = new Keycloak({
+            url: 'http://localhost:9090/auth/',
+            realm: 'myrealm',
+            clientId: 'myclient'
+        });
+        keycloak.init({
+            onLoad: 'login-required'
+        }).then(function () {
+            console.log(">>> INIT COMPLETE");
+            keycloak.loadUserProfile().then(info => {
+                console.log(">>> USER INFO: ", info);
+            });
+        });
+        console.log(">>> KEYCLOAK: ", keycloak);
         if (process.env.VUE_APP_UI_TITLE !== undefined && process.env.VUE_APP_UI_TITLE != "#UI_TITLE#") {
             this.$data.uiTitle = process.env.VUE_APP_UI_TITLE;
         }
