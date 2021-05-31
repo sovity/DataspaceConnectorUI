@@ -1,0 +1,24 @@
+<div class="userinfo">
+    <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+            <v-btn elevation="0" class="buttontext--text" v-bind="attrs" v-on="on">
+                <v-icon color="white">account_circle</v-icon>
+                {{username}}
+            </v-btn>
+        </template>
+        <v-list>
+            <v-list-item class="userinfo-userdata">
+                <div>
+                    <v-icon>badge</v-icon> {{fullname}}
+                </div>
+                <div>
+                    <v-icon>email</v-icon> {{email}}
+                </div>
+            </v-list-item>
+            <v-divider class="userinfo-divider"></v-divider>
+            <v-list-item link @click="logout">
+                <v-list-item-title>Logout</v-list-item-title>
+            </v-list-item>
+        </v-list>
+    </v-menu>
+</div>

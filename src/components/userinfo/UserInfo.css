@@ -1,0 +1,34 @@
+.userinfo {
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+.userinfo-username {
+    float: right;
+    margin-left: 5px;
+}
+
+.userinfo button span {
+    color: var(--v-text1-base)!important;
+}
+
+.userinfo button span i {
+    margin-right: 5px;
+}
+
+.userinfo-divider {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.userinfo-userdata {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 12px;
+    height: 40px;
+}
+
+.userinfo-userdata i {
+    font-size: 21px!important;
+}
