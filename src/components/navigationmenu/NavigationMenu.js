@@ -1,16 +1,18 @@
 import PageStructure from "@/pages/PageStructure";
+import authenticationUtils from "../../utils/authenticationUtils";
 
 export default {
   props: [],
   name: "navigation-menu",
   data() {
     return {
-      items: this.getItems(),
+      items: null,
       activeRoute: null
     }
   },
   mounted: function () {
     this.$data.activeRoute = this.$route;
+    this.loadMenuItems();
   },
   watch: {
     $route() {
@@ -18,7 +20,7 @@ export default {
     },
   },
   methods: {
-    getItems() {
+    loadMenuItems() {
       var items = [];
       for (let page of PageStructure.getPageStructure()) {
         let subitems = undefined;
@@ -32,14 +34,19 @@ export default {
             });
           }
         }
-        items.push({
-          icon: page.icon,
-          title: page.name,
-          to: page.path,
-          subitems: subitems
-        });
+        if (page.roles !== undefined) {
+          console.log(">>> authenticationUtils.hasRole(page.roles[0]): ", authenticationUtils.hasRole(page.roles[0]));
+        }
+        if (page.roles === undefined || authenticationUtils.hasRole(page.roles[0])) {
+          items.push({
+            icon: page.icon,
+            title: page.name,
+            to: page.path,
+            subitems: subitems
+          });
+        }
       }
-      return items;
+      this.$data.items = items;
     },
     isActive(item) {
 

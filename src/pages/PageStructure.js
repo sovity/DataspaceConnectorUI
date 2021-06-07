@@ -105,7 +105,8 @@ export default {
             name: "Settings",
             icon: "icon-settings",
             component: SettingsPage,
-            subpages: []
+            subpages: [],
+            roles: ["admins"]
         }
         ];
     },
