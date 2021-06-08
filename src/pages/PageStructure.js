@@ -10,8 +10,14 @@ import AppsPage from "@/pages/apps/AppsPage.vue";
 import SettingsPage from "@/pages/settings/SettingsPage.vue";
 import BackendConnectionsPage from "@/pages/dataoffering/backendconnections/BackendConnectionsPage.vue";
 
+let role_admin = "admin";
+let role_consumer = "consumer";
+let role_provider = "provider";
+
 export default {
     getPageStructure() {
+        this.getRoleNames();
+
         return [{
             path: "dashboard",
             name: "Dashboard",
@@ -58,7 +64,8 @@ export default {
                     component: AddRoutePage,
                     subpages: []
                 }]
-            }]
+            }],
+            roles: [role_provider, role_admin]
         }, {
             path: null,
             name: "Data Consumption",
@@ -87,7 +94,8 @@ export default {
                 path: "routesconsumption",
                 name: "Routes (Consumation)",
                 component: null
-            }]
+            }],
+            roles: [role_consumer, role_admin]
         }, {
             path: "brokers",
             name: "Brokers",
@@ -106,7 +114,7 @@ export default {
             icon: "icon-settings",
             component: SettingsPage,
             subpages: [],
-            roles: ["admins"]
+            roles: [role_admin]
         }
         ];
     },
@@ -116,5 +124,18 @@ export default {
             displayName = displayName.substring(0, displayName.indexOf('('));
         }
         return displayName;
+    },
+    getRoleNames() {
+        if (process.env.VUE_APP_ROLE_NAME_ADMIN !== undefined && process.env.VUE_APP_ROLE_NAME_ADMIN != "#ROLE_NAME_ADMIN#") {
+            role_admin = process.env.VUE_APP_ROLE_NAME_ADMIN;
+        }
+
+        if (process.env.VUE_APP_ROLE_NAME_CONSUMER !== undefined && process.env.VUE_APP_ROLE_NAME_CONSUMER != "#ROLE_NAME_CONSUMER#") {
+            role_admin = process.env.VUE_APP_ROLE_NAME_CONSUMER;
+        }
+
+        if (process.env.VUE_APP_ROLE_NAME_PROVIDER !== undefined && process.env.VUE_APP_ROLE_NAME_PROVIDER != "#ROLE_NAME_PROVIDER#") {
+            role_admin = process.env.VUE_APP_ROLE_NAME_PROVIDER;
+        }
     }
 }

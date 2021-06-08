@@ -29,8 +29,15 @@ export default {
         });
     },
 
-    hasRole(role) {
-        return keycloak.hasRealmRole(role);
+    hasRole(roleList) {
+        let response = false;
+        for (let role of roleList) {
+            if (keycloak.hasRealmRole(role)) {
+                response = true;
+                break;
+            }
+        }
+        return response;
     },
 
     logout() {

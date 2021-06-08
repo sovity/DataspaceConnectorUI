@@ -37,7 +37,7 @@ export default {
         if (page.roles !== undefined) {
           console.log(">>> authenticationUtils.hasRole(page.roles[0]): ", authenticationUtils.hasRole(page.roles[0]));
         }
-        if (page.roles === undefined || authenticationUtils.hasRole(page.roles[0])) {
+        if (page.roles === undefined || authenticationUtils.hasRole(page.roles)) {
           items.push({
             icon: page.icon,
             title: page.name,
