@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:18
 LABEL org.opencontainers.image.source = "https://github.com/International-Data-Spaces-Association/DataspaceConnectorUI"
 WORKDIR /usr/src/app
 COPY package*.json ./
